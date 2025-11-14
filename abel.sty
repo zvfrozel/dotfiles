@@ -1,6 +1,7 @@
 % Last updated May 4 2025
 
 \ProvidesPackage{abel}
+\makeatletter % CHANGED: enable use of internal LaTeX macros with @ in this package
 
 % Where should these settings actually be kept?
 \usepackage[english]{babel}
@@ -225,7 +226,7 @@ path Drawing(path g, pen p = defaultpen, arrowbar ar = None) {
   innerbottommargin=9pt,
   skipbelow=2pt,
   linecolor=blue,
-  nobreak=true,
+  % nobreak=true, % CHANGED: allow mdbluebox to break across pages to avoid overflow
   backgroundcolor=TealBlue!5,
 }
 \declaretheoremstyle[
@@ -244,7 +245,7 @@ path Drawing(path g, pen p = defaultpen, arrowbar ar = None) {
   frametitlefont=\bfseries,
   innertopmargin=4pt,
   innerbottommargin=8pt,
-  nobreak=true,
+  % nobreak=true, % CHANGED: allow mdredbox to break across pages to avoid overflow
   backgroundcolor=Salmon!5,
   linecolor=RawSienna,
 }
@@ -301,7 +302,7 @@ path Drawing(path g, pen p = defaultpen, arrowbar ar = None) {
   innertopmargin=9pt,
   innerbottommargin=9pt,
   linecolor=black,
-  nobreak=true,
+  % nobreak=true, % CHANGED: allow mdpurplebox to break across pages to avoid overflow
   backgroundcolor=Orchid!10,
   shadow=true,
   shadowsize=6pt,
@@ -370,7 +371,8 @@ path Drawing(path g, pen p = defaultpen, arrowbar ar = None) {
   \@ifundefined{chapter}{}{
     \addtokomafont{partprefix}{\rmfamily}
     \renewcommand*{\partformat}{\color{purple}
-      \scalebox{2.5}{\thepart}\enlargethispage{2em}}
+      \scalebox{2.5}{\thepart}% \enlargethispage{2em} % CHANGED: avoid enlarging page height to prevent bottom overflow
+    }
     \addtokomafont{chapterprefix}{\raggedleft}
     \RedeclareSectionCommand[beforeskip=0.5em]{chapter}
     \renewcommand*{\chapterformat}{\mbox{%
@@ -407,18 +409,18 @@ path Drawing(path g, pen p = defaultpen, arrowbar ar = None) {
     \setlength{\headheight}{0.75in}
     \setlength{\oddsidemargin}{0in}
     \setlength{\evensidemargin}{0in}
-    \setlength{\voffset}{-1.0in}
+    % \setlength{\voffset}{-1.0in} % CHANGED: let class handle vertical offset to avoid bottom overflow
     \setlength{\headsep}{10pt}
     \setlength{\textwidth}{6.5in}
     \setlength{\headwidth}{6.5in}
-    \setlength{\textheight}{8.75in}
+    % \setlength{\textheight}{8.75in} % CHANGED: use class default textheight to keep bottom margin safe
     \setlength{\parskip}{1ex plus 0.5ex minus 0.2ex}
     \setlength{\footskip}{0.3in}
 }
 {
     \usepackage[headsepline]{scrlayer-scrpage}
     \renewcommand{\headfont}{}
-    \addtolength{\textheight}{3.14cm}
+    % \addtolength{\textheight}{3.14cm} % CHANGED: avoid globally enlarging textheight to reduce overflow risk
     \setlength{\footskip}{0.5in}
     \setlength{\headsep}{10pt}
     \ihead{\footnotesize\textbf{\theauthor} --- \thedate}
@@ -427,3 +429,5 @@ path Drawing(path g, pen p = defaultpen, arrowbar ar = None) {
     \ohead{\footnotesize\textbf{\thetitle}}
     \cfoot{\pagemark}
 }
+
+\makeatother % CHANGED: restore catcode of @ after package definitions
