@@ -226,7 +226,7 @@ path Drawing(path g, pen p = defaultpen, arrowbar ar = None) {
   innerbottommargin=9pt,
   skipbelow=2pt,
   linecolor=blue,
-  % nobreak=true, % CHANGED: allow mdbluebox to break across pages to avoid overflow
+  nobreak=true,
   backgroundcolor=TealBlue!5,
 }
 \declaretheoremstyle[
@@ -245,7 +245,7 @@ path Drawing(path g, pen p = defaultpen, arrowbar ar = None) {
   frametitlefont=\bfseries,
   innertopmargin=4pt,
   innerbottommargin=8pt,
-  % nobreak=true, % CHANGED: allow mdredbox to break across pages to avoid overflow
+  nobreak=true,
   backgroundcolor=Salmon!5,
   linecolor=RawSienna,
 }
@@ -302,7 +302,7 @@ path Drawing(path g, pen p = defaultpen, arrowbar ar = None) {
   innertopmargin=9pt,
   innerbottommargin=9pt,
   linecolor=black,
-  % nobreak=true, % CHANGED: allow mdpurplebox to break across pages to avoid overflow
+  nobreak=true,
   backgroundcolor=Orchid!10,
   shadow=true,
   shadowsize=6pt,
@@ -315,7 +315,7 @@ path Drawing(path g, pen p = defaultpen, arrowbar ar = None) {
 }
 \newcommand{\listhack}{$\empty$\vspace{-2em}}
 
-%%fakesection Theorem setup by Evan Chen
+%%fakesection Theorem setup by Evan
 \usepackage{amsthm}
 \usepackage{thmtools}
 
